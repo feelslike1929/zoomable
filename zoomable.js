@@ -16,10 +16,9 @@
     var currentScale = settings.inheritScale;
 
     function feedback() {
-      $('#currentZoom').remove();
-      $('body').append('<div id="currentZoom"></div>');
-
-      $('#currentZoom').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feebackDuration);
+      $('#cz').remove();
+      $('body').append('<div id="cz" style="position:absolute;left:50%;top:50%;font-size:2em;"></div>');
+      $('#cz').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feebackDuration);
       var t = setTimeout(function() {
         $('#currentZoom').remove();
       }, settings.feebackDuration);
@@ -28,16 +27,16 @@
 
     if (settings.origin == 'mouse') {
       //get mouse position
-      $(document).on('mousemove', function(e) {
+      self.on('mousemove', function(e) {
         settings.originX = ((e.pageX / $(document).width()) * 100).toFixed();
         settings.originY = ((e.pageY / $(document).height()) * 100).toFixed();
       });
     }
     if (settings.zoomControls == true) {
       //show zoom controls
-      $('body').append('<div id="zoomControls"><button value="Reset Zoom" id="reset" class="btn">Reset Zoom</button><button value="Increase Zoom" id="increaseZoom" class="btn">Increase Zoom</button><button value="Decrease Zoom" id="decreaseZoom" class="btn">Decrease Zoom</button></div>');
+      $('body').append('<div id="zoomControls"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
 
-      $(document).on('click', '#reset', function() {
+      $('#reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           self.css({
@@ -48,7 +47,7 @@
         }
       });
 
-      $(document).on('click', '#increaseZoom', function() {
+      $('#inc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           self.css({
@@ -59,7 +58,7 @@
         }
       });
 
-      $(document).on('click', '#decreaseZoom', function() {
+      $('#dec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           self.css({
@@ -71,7 +70,7 @@
       });
     }
 
-    $(document).on('mousewheel DOMMouseScroll', function(e) {
+    self.on('mousewheel DOMMouseScroll', function(e) {
       if (e.altKey) {
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
