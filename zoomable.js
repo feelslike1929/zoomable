@@ -91,9 +91,6 @@
         });
       }
     });
-
     return self;
   };
 }(jQuery));
-
-$("#container").zoomable();
