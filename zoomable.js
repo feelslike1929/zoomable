@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+//v1.0
+
 (function($) {
   $.fn.zoomable = function(options) {
     var self = this;
@@ -33,7 +35,8 @@
       origin: null, //NULL | STRING - "mouse"
       originX: 0, //INT - interpreted as percentage
       originY: 0, //INT - interpreted as percentage
-      zoomControls: true //BOOLEAN
+      zoomControls: true, //BOOLEAN
+      zoomableArea: self //jQuery selector
     }, options);
     var currentScale = settings.inheritScale;
 
@@ -92,7 +95,7 @@
       });
     }
 
-    self.on('mousewheel DOMMouseScroll', function(e) {
+    settings.zoomableArea.on('mousewheel DOMMouseScroll', function(e) {
       if (e.altKey) {
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
