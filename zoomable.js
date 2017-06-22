@@ -41,7 +41,7 @@
     var currentScale = settings.inheritScale;
 
     function feedback() {
-      $('#cz').remove();
+      $('#cz').length > 0 && $('#cz').remove();
       $('body').append('<div id="cz" style="position:absolute;left:50%;top:50%;font-size:2em;"></div>');
       $('#cz').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feebackDuration);
       var t = setTimeout(function() {
