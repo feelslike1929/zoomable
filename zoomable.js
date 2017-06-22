@@ -50,16 +50,16 @@
       clearTimeout(t);
     }
 
-    if (settings.origin == 'mouse') {
+    if (settings.origin === 'mouse') {
       //get mouse position
       self.on('mousemove', function(e) {
         settings.originX = ((e.pageX / $(document).width()) * 100).toFixed();
         settings.originY = ((e.pageY / $(document).height()) * 100).toFixed();
       });
     }
-    if (settings.zoomControls == true) {
+    if (settings.zoomControls === true) {
       //show zoom controls
-      $('body').append('<div id="zoomControls"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
+      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;left:0;"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
 
       $('#zoomControls #reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
@@ -68,7 +68,7 @@
             'transform': 'scale(' + settings.inheritScale + ',' + settings.inheritScale + ')',
             'transform-origin': settings.originX + '%' + settings.originY + '%'
           });
-          settings.feedback == true && feedback();
+          (settings.feedback === true) && feedback();
         }
       });
 
@@ -79,7 +79,7 @@
             'transform': 'scale(' + currentScale + ',' + currentScale + ')',
             'transform-origin': settings.originX + '%' + settings.originY + '%'
           });
-          settings.feedback == true && feedback();
+          settings.feedback === true && feedback();
         }
       });
 
@@ -90,7 +90,7 @@
             'transform': 'scale(' + currentScale + ',' + currentScale + ')',
             'transform-origin': settings.originX + '%' + settings.originY + '%'
           });
-          settings.feedback == true && feedback();
+          settings.feedback === true && feedback();
         }
       });
     }
@@ -100,13 +100,13 @@
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
             currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
-            settings.feedback == true && feedback();
+            settings.feedback === true && feedback();
           }
 
         } else {
           if (currentScale > settings.minScale) {
             currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
-            settings.feedback == true && feedback();
+            settings.feedback === true && feedback();
           }
         }
         self.css({
@@ -118,3 +118,9 @@
     return self;
   };
 }(jQuery));
+
+//instantiate as zoomable
+$('#container').zoomable({
+  //options
+  feedback: true //true is the default
+});
