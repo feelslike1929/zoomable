@@ -61,7 +61,7 @@
       //show zoom controls
       $('body').append('<div id="zoomControls"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
 
-      $('#reset').on('click', function() {
+      $('#zoomControls #reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           self.css({
@@ -72,7 +72,7 @@
         }
       });
 
-      $('#inc').on('click', function() {
+      $('#zoomControls #inc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           self.css({
@@ -83,7 +83,7 @@
         }
       });
 
-      $('#dec').on('click', function() {
+      $('#zoomControls #dec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           self.css({
