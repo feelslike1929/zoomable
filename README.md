@@ -1,4 +1,4 @@
-# Welcome to the zoomable wiki!
+# Zoomable - a simple jQuery plugin for custom zooming
 
 This jQuery plugin is designed to add zooming functionality of an element using zoom controls (increase, decrease, and reset zoom) or alt + mouse wheel scroll.
 
