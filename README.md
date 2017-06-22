@@ -2,7 +2,7 @@
 
 This jQuery plugin is designed to add zooming functionality of an element using zoom controls (increase, decrease, and reset zoom) or alt + mouse wheel scroll.
 
-<a href="https://jsfiddle.net/FeelsLike1929/81okd956/" target="_blank">demo on jsfiddle</a>
+<a href="https://jsfiddle.net/FeelsLike1929/81okd956/">demo on jsfiddle</a>
 
 ## Options
 inheritScale
