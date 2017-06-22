@@ -68,7 +68,7 @@
             'transform': 'scale(' + settings.inheritScale + ',' + settings.inheritScale + ')',
             'transform-origin': settings.originX + '%' + settings.originY + '%'
           });
-          (settings.feedback == true) && feedback();
+          settings.feedback == true && feedback();
         }
       });
 
