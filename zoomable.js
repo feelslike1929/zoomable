@@ -26,17 +26,17 @@
   $.fn.zoomable = function(options) {
     var self = this;
     var settings = $.extend({
-      inheritScale: 1, //INT - original scale
+      inheritScale: 1,
       increment: 0.1,
-      minScale: 0.1, //INT - interpreted as percentage
-      maxScale: 2, //INT - interpreted as percentage
-      feedback: true, //BOOLEAN
-      feedbackDuration: 750, //INT
-      origin: null, //NULL | STRING - "mouse"
-      originX: 0, //INT - interpreted as percentage
-      originY: 0, //INT - interpreted as percentage
-      zoomControls: true, //BOOLEAN
-      zoomableArea: self //jQuery selector
+      minScale: 0.1,
+      maxScale: 2,
+      feedback: true,
+      feedbackDuration: 750,
+      origin: null,
+      originX: 0,
+      originY: 0,
+      zoomControls: true,
+      zoomableArea: self
     }, options);
     var currentScale = settings.inheritScale;
 
