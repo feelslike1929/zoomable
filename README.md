@@ -27,7 +27,7 @@ feedback
 
 feedbackDuration
 * Accepts INT value (in milliseconds - For example, 1000 for 1 second)
-*
+* Determines how long the visual feedback of the curren zom percentage lingers on screen
 
 origin:
 * Accepts NULL or STRING ("mouse")
