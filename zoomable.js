@@ -35,7 +35,7 @@
       origin: null,
       originX: 0,
       originY: 0,
-      zoomControls: true,
+      zoomControls: false,
       zoomableArea: self
     }, options);
     var currentScale = settings.inheritScale;
