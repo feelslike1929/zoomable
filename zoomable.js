@@ -120,7 +120,7 @@
 }(jQuery));
 
 //instantiate as zoomable
-$('#container').zoomable({
-  //options
-  feedback: true //true is the default
-});
+// $('#container').zoomable({
+//   //options
+//   feedback: true //true is the default
+// });
