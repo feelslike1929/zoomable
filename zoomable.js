@@ -97,6 +97,7 @@
 
     settings.zoomableArea.on('mousewheel DOMMouseScroll', function(e) {
       if (e.altKey) {
+        e.preventDefault();
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
             currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
