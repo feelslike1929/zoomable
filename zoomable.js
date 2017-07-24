@@ -35,7 +35,7 @@
       origin: null,
       originX: 0,
       originY: 0,
-      zoomControls: false,
+      zoomControls: true,
       zoomableArea: self
     }, options);
     var currentScale = settings.inheritScale;
@@ -59,9 +59,9 @@
     }
     if (settings.zoomControls === true) {
       //show zoom controls
-      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;left:0;"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
+      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;right:0;"><button id="zoomableReset" class="btn">Reset Zoom</button><button id="zoomableInc" class="btn">Increase Zoom</button><button id="zoomableDec" class="btn">Decrease Zoom</button></div>');
 
-      $('#zoomControls #reset').on('click', function() {
+      $('#zoomableReset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           self.css({
@@ -72,7 +72,7 @@
         }
       });
 
-      $('#zoomControls #inc').on('click', function() {
+      $('#zoomableInc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           self.css({
@@ -83,7 +83,7 @@
         }
       });
 
-      $('#zoomControls #dec').on('click', function() {
+      $('#zoomableDec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           self.css({
@@ -119,9 +119,3 @@
     return self;
   };
 }(jQuery));
-
-//instantiate as zoomable
-// $('#container').zoomable({
-//   //options
-//   feedback: true //true is the default
-// });
