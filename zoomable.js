@@ -31,7 +31,7 @@
       minScale: 0.1,
       maxScale: 2,
       feedback: true,
-      feedbackDuration: 750,
+      feedbackDuration: 12750,
       origin: null,
       originX: 0,
       originY: 0,
@@ -42,12 +42,8 @@
 
     function feedback() {
       $('#cz').length > 0 && $('#cz').remove();
-      $('body').append('<div id="cz" style="position:absolute;left:50%;top:50%;font-size:2em;"></div>');
-      $('#cz').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feebackDuration);
-      var t = setTimeout(function() {
-        $('#cz').remove();
-      }, settings.feebackDuration);
-      clearTimeout(t);
+      $('body').append('<div id="cz" style="position:absolute;left:50%;top:50%;font-size:2em;text-shadow:0 0 5px #fff;"></div>');
+      $('#cz').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feedbackDuration, function(){$(this.remove())});
     }
 
     if (settings.origin === 'mouse') {
@@ -59,9 +55,9 @@
     }
     if (settings.zoomControls === true) {
       //show zoom controls
-      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;right:0;"><button id="zoomableReset" class="btn">Reset Zoom</button><button id="zoomableInc" class="btn">Increase Zoom</button><button id="zoomableDec" class="btn">Decrease Zoom</button></div>');
+      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;left:0;"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
 
-      $('#zoomableReset').on('click', function() {
+      $('#zoomControls #reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           self.css({
@@ -72,7 +68,7 @@
         }
       });
 
-      $('#zoomableInc').on('click', function() {
+      $('#zoomControls #inc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           self.css({
@@ -83,7 +79,7 @@
         }
       });
 
-      $('#zoomableDec').on('click', function() {
+      $('#zoomControls #dec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           self.css({
@@ -97,7 +93,6 @@
 
     settings.zoomableArea.on('mousewheel DOMMouseScroll', function(e) {
       if (e.altKey) {
-        e.preventDefault();
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
             currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
@@ -119,3 +114,9 @@
     return self;
   };
 }(jQuery));
+
+//instantiate as zoomable
+//$('#container').zoomable({
+	//options
+//  feedback: true //true is the default
+//});
