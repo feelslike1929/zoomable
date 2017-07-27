@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//v1.0
+//v1.1
 
 (function($) {
   $.fn.zoomable = function(options) {
@@ -31,19 +31,24 @@
       minScale: 0.1,
       maxScale: 2,
       feedback: true,
-      feedbackDuration: 12750,
+      feedbackDuration: 1000,
+      feedbackClass : 'zoomable-feedback',
       origin: null,
       originX: 0,
       originY: 0,
-      zoomControls: true,
+      zoomControls: false,
+      zoomControlsClass: 'zoom-controls',
+      zoomControlsButtonClass: 'zoomable-button',
       zoomableArea: self
     }, options);
     var currentScale = settings.inheritScale;
 
     function feedback() {
-      $('#cz').length > 0 && $('#cz').remove();
-      $('body').append('<div id="cz" style="position:absolute;left:50%;top:50%;font-size:2em;text-shadow:0 0 5px #fff;"></div>');
-      $('#cz').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feedbackDuration, function(){$(this.remove())});
+      $('#zoomable-feedback').length > 0 && $('#zoomable-feedback').remove();
+      $('body').append('<div id="zoomable-feedback" class="'+settings.feedbackClass+'"></div>');
+      $('#zoomable-feedback').text((currentScale * 100).toFixed(0) + '%').fadeOut(settings.feedbackDuration, function(){
+      $(this).remove()
+      });
     }
 
     if (settings.origin === 'mouse') {
@@ -55,9 +60,9 @@
     }
     if (settings.zoomControls === true) {
       //show zoom controls
-      $('body').append('<div id="zoomControls" style="position:fixed;bottom:0;left:0;"><button id="reset" class="btn">Reset Zoom</button><button id="inc" class="btn">Increase Zoom</button><button id="dec" class="btn">Decrease Zoom</button></div>');
+      $('body').append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
 
-      $('#zoomControls #reset').on('click', function() {
+      $('#zoomable-reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           self.css({
@@ -68,7 +73,7 @@
         }
       });
 
-      $('#zoomControls #inc').on('click', function() {
+      $('#zoomable-inc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           self.css({
@@ -79,7 +84,7 @@
         }
       });
 
-      $('#zoomControls #dec').on('click', function() {
+      $('#zoomable-dec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           self.css({
