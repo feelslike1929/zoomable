@@ -29,6 +29,10 @@ This jQuery plugin is designed to add zooming functionality of an element using 
 * Accepts INT value (in milliseconds - For example, 1000 for 1 second)
 * Determines how long the visual feedback of the curren zom percentage lingers on screen
 
+**feedbackClass**
+* Accepts a string
+* The class that is added the #zoomable-feedback element 
+
 **origin**
 * Accepts NULL or STRING ("mouse")
 * Used to overwrite the originX and originY values with the current position of the cursor
