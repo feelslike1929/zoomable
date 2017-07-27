@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//v1.2
+//v1.2.1
 
 (function($) {
   $.fn.zoomable = function(options) {
@@ -51,6 +51,13 @@
       $(this).remove()
       });
     }
+    function eventChanges() {
+      self.css({
+        'transform': 'scale(' + currentScale + ',' + currentScale + ')',
+        'transform-origin': settings.originX + '%' + settings.originY + '%'
+      });
+      settings.feedback === true && feedback();
+    }
 
     if (settings.origin === 'mouse') {
       //get mouse position
@@ -66,33 +73,21 @@
       $('#zoomable-reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
-          self.css({
-            'transform': 'scale(' + settings.inheritScale + ',' + settings.inheritScale + ')',
-            'transform-origin': settings.originX + '%' + settings.originY + '%'
-          });
-          (settings.feedback === true) && feedback();
+          eventChanges();
         }
       });
 
       $('#zoomable-inc').on('click', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
-          self.css({
-            'transform': 'scale(' + currentScale + ',' + currentScale + ')',
-            'transform-origin': settings.originX + '%' + settings.originY + '%'
-          });
-          settings.feedback === true && feedback();
+          eventChanges();
         }
       });
 
       $('#zoomable-dec').on('click', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
-          self.css({
-            'transform': 'scale(' + currentScale + ',' + currentScale + ')',
-            'transform-origin': settings.originX + '%' + settings.originY + '%'
-          });
-          settings.feedback === true && feedback();
+          eventChanges();
         }
       });
     }
@@ -102,19 +97,14 @@
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
             currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
-            settings.feedback === true && feedback();
           }
 
         } else {
           if (currentScale > settings.minScale) {
             currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
-            settings.feedback === true && feedback();
           }
         }
-        self.css({
-          'transform': 'scale(' + currentScale + ',' + currentScale + ')',
-          'transform-origin': settings.originX + '%' + settings.originY + '%'
-        });
+        eventChanges()
       }
     });
     return self;
