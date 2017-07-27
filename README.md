@@ -53,6 +53,10 @@ This jQuery plugin is designed to add zooming functionality of an element using 
 * Accepts a string
 * The class that is added the buttons (reset, increase, and decrease) inside of the #zoom-controls element 
 
+**zoomControlsAppendLocation**
+* Accepts a jQuery selector (For example,  $('#container') or $(document) )
+* Determines which element the #zoom-controls element will be appended to
+
 **zoomableArea**
 * Accepts a jQuery selector (For example,  $('#container') or $(document) )
 * Determines which element or section of the page allows for the mouse wheel scroll zoom
