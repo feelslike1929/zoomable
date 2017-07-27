@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//v1.1
+//v1.2
 
 (function($) {
   $.fn.zoomable = function(options) {
@@ -39,6 +39,7 @@
       zoomControls: false,
       zoomControlsClass: 'zoom-controls',
       zoomControlsButtonClass: 'zoomable-button',
+      zoomControlsAppendLocation: $('body'),
       zoomableArea: self
     }, options);
     var currentScale = settings.inheritScale;
@@ -60,7 +61,7 @@
     }
     if (settings.zoomControls === true) {
       //show zoom controls
-      $('body').append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
+      settings.zoomControlsAppendLocation.append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
 
       $('#zoomable-reset').on('click', function() {
         if (currentScale != settings.inheritScale) {
@@ -119,9 +120,3 @@
     return self;
   };
 }(jQuery));
-
-//instantiate as zoomable
-//$('#container').zoomable({
-	//options
-//  feedback: true //true is the default
-//});
