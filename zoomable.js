@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//v1.2.1
+//v1.2.2
 
 (function($) {
   $.fn.zoomable = function(options) {
-    var self = this;
-    var settings = $.extend({
+    var self = this,
+    settings = $.extend({
       inheritScale: 1,
       increment: 0.1,
       minScale: 0.1,
@@ -41,8 +41,8 @@
       zoomControlsButtonClass: 'zoomable-button',
       zoomControlsAppendLocation: $('body'),
       zoomableArea: self
-    }, options);
-    var currentScale = settings.inheritScale;
+    }, options),
+    currentScale = settings.inheritScale;
 
     function feedback() {
       $('#zoomable-feedback').length > 0 && $('#zoomable-feedback').remove();
@@ -70,21 +70,21 @@
       //show zoom controls
       settings.zoomControlsAppendLocation.append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
 
-      $('#zoomable-reset').on('click', function() {
+      $('#zoomable-reset').click(function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           eventChanges();
         }
       });
 
-      $('#zoomable-inc').on('click', function() {
+      $('#zoomable-inc').click(function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           eventChanges();
         }
       });
 
-      $('#zoomable-dec').on('click', function() {
+      $('#zoomable-dec').click(function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           eventChanges();
@@ -94,6 +94,7 @@
 
     settings.zoomableArea.on('mousewheel DOMMouseScroll', function(e) {
       if (e.altKey) {
+      e.preventDefault();
         if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
           if (currentScale < settings.maxScale) {
             currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
