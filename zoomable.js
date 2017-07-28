@@ -70,21 +70,21 @@
       //show zoom controls
       settings.zoomControlsAppendLocation.append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
 
-      $('#zoomable-reset').click(function() {
+      settings.zoomControlsAppendLocation.on('click', '#zoomable-reset', function() {
         if (currentScale != settings.inheritScale) {
           currentScale = settings.inheritScale;
           eventChanges();
         }
       });
 
-      $('#zoomable-inc').click(function() {
+      settings.zoomControlsAppendLocation.on('click', '#zoomable-inc', function() {
         if (currentScale < settings.maxScale) {
           currentScale = parseFloat((currentScale + settings.increment).toFixed(2));
           eventChanges();
         }
       });
 
-      $('#zoomable-dec').click(function() {
+      settings.zoomControlsAppendLocation.on('click', '#zoomable-dec', function() {
         if (currentScale > settings.increment) {
           currentScale = parseFloat((currentScale - settings.increment).toFixed(2));
           eventChanges();
