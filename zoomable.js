@@ -66,7 +66,7 @@
         settings.originY = ((e.pageY / $(document).height()) * 100).toFixed();
       });
     }
-    if (settings.zoomControls === true) {
+    if (settings.zoomControls === true && $('#zoom-controls').length == 0) {
       //show zoom controls
       settings.zoomControlsAppendLocation.append('<div id="zoom-controls" class="'+settings.zoomControlsClass+'"><button id="zoomable-reset" class="'+settings.zoomControlsButtonClass+'">Reset Zoom</button><button id="zoomable-inc" class="'+settings.zoomControlsButtonClass+'">Increase Zoom</button><button id="zoomable-dec" class="'+settings.zoomControlsButtonClass+'">Decrease Zoom</button></div>');
 
